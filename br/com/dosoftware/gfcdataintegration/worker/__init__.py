@@ -62,4 +62,19 @@ def createSaldoContaDataFrame (dtCSV, dtSaldoConta):
             
     return dtSaldoConta
     
-    
+def createPlanoContasFinaceiroDataFrame(dtCSV, dtPlanoContasFinaceiro):
+    maxLenCTA = max(map(len, map(str, dtCSV['COD_CTA_FIN'])))
+    for index, row in dtCSV.iterrows():
+        cod_cta = applyMask(row['COD_CTA'], Constantes.mask)
+        cod_cta_fin = applyMask(row['COD_CTA_FIN'], Constantes.mask)
+        newIndex = len(dtPlanoContasFinaceiro)
+
+        dtPlanoContasFinaceiro.loc[newIndex, 'IDPLANOCONTAS'] = (SQLServer().getIDPlanoContasByCodigo(cod_cta) if (len(cod_cta) == maxLenCTA) else None)
+        dtPlanoContasFinaceiro.loc[newIndex, 'IND_CTA'] = (Constantes.ANALITICA  if (len(cod_cta) == maxLenCTA) else Constantes.SINTETICA)
+        dtPlanoContasFinaceiro.loc[newIndex, 'NIVEL'] = applyNivel(cod_cta_fin)
+        dtPlanoContasFinaceiro.loc[newIndex, 'COD_CTA'] = cod_cta_fin
+        dtPlanoContasFinaceiro.loc[newIndex, 'COD_CTA_SUP'] = getCOD_CTA_SUP(cod_cta_fin)
+        dtPlanoContasFinaceiro.loc[newIndex, 'CTA'] = row['CTA']
+        dtPlanoContasFinaceiro.loc[newIndex, 'TIPO'] = (row['TIPO']  if (len(cod_cta) == maxLenCTA) else None)
+        
+    return dtPlanoContasFinaceiro

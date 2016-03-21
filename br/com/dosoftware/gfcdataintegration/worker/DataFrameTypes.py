@@ -26,6 +26,10 @@ def specifyDataFrameSaldoConta():
 
 def specifyDataFramePlanoContasFinanceiro():
     columns = ['IDPLANOCONTAS', 'IND_CTA', 'NIVEL', 'COD_CTA', 'COD_CTA_SUP', 'CTA', 'TIPO']
-    return pandas.DataFrame(columns=columns, dtype=str)
+    type = [Constantes.TYPE_QUERY, Constantes.TYPE_STR, Constantes.TYPE_STR, Constantes.TYPE_STR, Constantes.TYPE_STR, Constantes.TYPE_STR, Constantes.TYPE_STR, Constantes.TYPE_STR]
+    dict_types = dict(zip(columns, type))
+    df = pandas.DataFrame(columns=columns, dtype=str)
+    return df, dict_types
+
 
     

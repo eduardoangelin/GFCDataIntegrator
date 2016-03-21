@@ -3,6 +3,7 @@ from br.com.dosoftware.gfcdataintegration.util.Constantes import Constantes
 
 def applyMask(cod_cta, mask):
     result = ''
+    cod_cta = str(cod_cta).replace('.', '')
     countMask = 0
     for i in range(len(cod_cta)):
         while(mask[countMask] =='.'):
