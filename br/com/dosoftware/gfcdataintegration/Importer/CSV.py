@@ -9,7 +9,6 @@ from pandas.core.frame import DataFrame
 path = 'C:\\Users\\Angelin\\workspace\\GFCDataIntegration'
 
 
-
 def readCSV(filename, delimiter=Constantes.delimiter):
     filename = (os.path.join(path, 'resources', 'CSV', filename))
     with codecs.open(filename, 'r', encoding='utf-8') as csvfile:
@@ -30,4 +29,9 @@ def convertPandasDF2Matrix(df): # returning a numpy (nd)array
     return ndArray
 
 
+def WriteFile(filename, content):
+    filename = (os.path.join(path, 'resources', 'CSV', filename))
+    file = open(filename, "w")
+    file.write(content)
+    file.close()
     
