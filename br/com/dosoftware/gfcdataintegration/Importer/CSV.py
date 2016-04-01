@@ -10,7 +10,7 @@ path = 'C:\\Users\\Angelin\\workspace\\GFCDataIntegration'
 
 
 def readCSV(filename, delimiter=Constantes.delimiter):
-    filename = (os.path.join(path, 'resources', 'CSV', filename))
+    filename = (os.path.join(path, 'resources', 'CSV', 'CC', filename))
     with codecs.open(filename, 'r', encoding='utf-8') as csvfile:
         freader = csv.reader(csvfile, delimiter=delimiter, quotechar='|')
         
@@ -19,7 +19,7 @@ def readCSV(filename, delimiter=Constantes.delimiter):
             print (data)
 
 def readCSV2PandasDF(filename, delimiter=Constantes.delimiter):
-    filename = (os.path.join(path, 'resources', 'CSV', filename))
+    filename = (os.path.join(path, 'resources', 'CSV', 'CC', filename))
     data = pandas.read_csv(filename, delimiter=delimiter, encoding='cp1252', dtype=str)
     return data
 
@@ -30,7 +30,7 @@ def convertPandasDF2Matrix(df): # returning a numpy (nd)array
 
 
 def WriteFile(filename, content):
-    filename = (os.path.join(path, 'resources', 'CSV', filename))
+    filename = (os.path.join(path, 'resources', 'CSV', 'CC', filename))
     file = open(filename, "w")
     file.write(content)
     file.close()

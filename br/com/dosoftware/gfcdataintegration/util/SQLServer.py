@@ -26,12 +26,12 @@ class SQLServer(object):
             return "({})".format(value)
         return str(value)
     
-    def scriptInsert(self, df, dict, withGO = True):
+    def scriptInsert(self, tableName, df, dict, withGO = True):
         columns = list(df.columns.values)
         cmd = ''
         for idx, row in df.iterrows():
             #print ('Linha: '+str(idx))
-            cmd += 'INSERT INTO ('
+            cmd += 'INSERT INTO '+ tableName + ' ('
             for j in columns:
                 cmd += str(j)+', '
             cmd = cmd[0:-2] + ") VALUES ("

@@ -16,6 +16,20 @@ def specifyDataFrameCaixaBanco():
     df = pandas.DataFrame(columns=columns, dtype=str)
     return df, dict_types
 
+def specifyDataFrameClienteFornecedor():
+    columns = ['IDPLANOCONTAS', 'CLIFOR', 'PESSOA'] 
+    type = [Constantes.TYPE_QUERY, Constantes.TYPE_STR, Constantes.TYPE_STR]
+    dict_types = dict(zip(columns, type))
+    df = pandas.DataFrame(columns=columns, dtype=str)
+    return df, dict_types
+
+def specifyDataFrameResultado():
+    columns = ['IDPLANOCONTAS'] 
+    type = [Constantes.TYPE_QUERY]
+    dict_types = dict(zip(columns, type))
+    df = pandas.DataFrame(columns=columns, dtype=str)
+    return df, dict_types
+
 def specifyDataFrameSaldoConta():
     columns = ['IDPLANOCONTAS', 'IDCENTROCUSTO', 'DT_SALDO', 'VL_SALDO']
     type = [Constantes.TYPE_QUERY, Constantes.TYPE_QUERY, Constantes.TYPE_DATE, Constantes.TYPE_MONEY]

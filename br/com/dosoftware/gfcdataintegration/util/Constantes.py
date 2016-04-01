@@ -17,6 +17,8 @@ class Constantes(object):
     TYPE_MONEY = 'MONEY'
     TYPE_QUERY = 'QUERY'
     
+    PESSOA = 'J'
+    
     mask = 'x.x.xx.xx.xxx'
     maskFinanceiro = 'x.x.xx.xx.xxx'
     delimiter = ';'
@@ -24,11 +26,21 @@ class Constantes(object):
     CX_BCO = 'CX_BCO'
     CLI_FOR = 'CLI_FOR'
     RES = 'RES'
-    ANALITICA = 'Analitica'
-    SINTETICA = 'Sintetica'
-    DEVEDORA = 'Devedora'
-    CREDORA = 'Credora'
-
+    JUR = 'JUR'
+    DESC = 'DESC'
+    INVESTIMENTO = 'INV'
+    EMPRESTIMO = 'EMP'
+    ANALITICA = 'A'
+    SINTETICA = 'S'
+    DEVEDORA = 'D'
+    CREDORA = 'C'
+    
+    CX = 'CX'
+    CXE = 'CXE'
+    CXS = 'CXS'
+    MV = 'MV'
+    MVE = 'MVE'
+    MVS = 'MVS'
     
     
     
