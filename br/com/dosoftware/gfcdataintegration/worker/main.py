@@ -96,11 +96,26 @@ def geraPCCompleto(filenameContabil, filenameFinanceiro):
     result += geraPCF(filenameFinanceiro)
     return result
     
+def geraLancamento(filename):
+    procedureName = "SP_GERAMOVIMENTO_AUXILIAR"
+    dtCSV = readCSV2PandasDF(filename)
+    dtGeraMovimento, typeMOV = specifyDataFrameGeraMovimento()
+    dtGeraMovimento = createGeraMovimentoDataFrame(dtCSV, dtGeraMovimento)
+    content = SQLServer().scriptExecute(procedureName, dtGeraMovimento, typeMOV)
+    WriteFile(filename.split('.')[0]+".sql", content)
+    return content
+
+
 if __name__ == '__main__':
-    filenameContabil = 'PlanoContasContabilCCEduardo.csv'
-    filenameFinanceiro = 'PlanoContasFinanceiroCCEduardo.csv'
+    #filenameContabil = 'PlanoContasContabilCCEduardo.csv'
+    #filenameFinanceiro = 'PlanoContasFinanceiroCCEduardo.csv'
+    #content = ''
+    #content += geraPCCompleto(filenameContabil, filenameFinanceiro)
+    #WriteFile("PovoamentoCompleto.sql", content)
+    
+    filename = 'LancamentosCC.csv'
     content = ''
-    content += geraPCCompleto(filenameContabil, filenameFinanceiro)
-    WriteFile("PovoamentoCompleto.sql", content)
+    content += geraLancamento(filename)
+    print (content)
     
     

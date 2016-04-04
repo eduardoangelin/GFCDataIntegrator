@@ -5,6 +5,7 @@ Created on 13 de mar de 2016
 @author: Angelin
 '''
 from br.com.dosoftware.gfcdataintegration.util.Constantes import Constantes
+import numpy as np
 
 class SQLServer(object):
     '''
@@ -26,25 +27,41 @@ class SQLServer(object):
             return "({})".format(value)
         return str(value)
     
-    def scriptInsert(self, tableName, df, dict, withGO = True):
+    def scriptInsert(self, tableName, df, dictTypes, withGO = True):
         columns = list(df.columns.values)
         cmd = ''
         for idx, row in df.iterrows():
-            #print ('Linha: '+str(idx))
             cmd += 'INSERT INTO '+ tableName + ' ('
             for j in columns:
                 cmd += str(j)+', '
             cmd = cmd[0:-2] + ") VALUES ("
             for j in columns:
-                if (row[j] != None):
-                    value = self.applyType(row[j], dict[j])
+                if (row[j] != None and (str(row[j]) != 'nan')):
+                    value = self.applyType(row[j], dictTypes[j])
                 else:
                     value = 'NULL'
                 cmd += value+", "
             cmd = cmd[0:-2] + ")\n"
             if (withGO):
                 cmd += 'GO\n'
-            #print (cmd)
+        return cmd
+    
+    def scriptExecute(self, procedureName, df, dictTypes, withGO = True):
+        columns = list(df.columns.values)
+        print (columns)
+        print (df)
+        cmd = ''
+        for idx, row in df.iterrows():
+            cmd += 'EXECUTE '+ procedureName + ' '
+            for j in columns:
+                if (row[j] != None and (str(row[j]) != 'nan')):
+                    value = self.applyType(row[j], dictTypes[j])
+                else:
+                    value = 'NULL'
+                cmd += value+", "
+            cmd = cmd[0:-2] + "\n"
+            if (withGO):
+                cmd += 'GO\n'
         return cmd
     
     def getID(self, idCTA, table, column, value):

@@ -46,4 +46,11 @@ def specifyDataFramePlanoContasFinanceiro():
     return df, dict_types
 
 
+def specifyDataFrameGeraMovimento():
+    columns = ['ID', 'DATA', 'DOCUMENTO', 'CONTADEVEDORA', 'CENTROCUSTODEVEDOR', 'CONTACREDORA', 'CENTROCUSTOCREDOR', 'IDMOEDA', 'IDPORTADOR', 'IDOPERACAO', 'IDHISTO_PADRO', 'HIST', 'TIPO_MOVIMENTO', 'VALOR', 'COMANDO']
+    type = [Constantes.TYPE_QUERY, Constantes.TYPE_DATE, Constantes.TYPE_STR, Constantes.TYPE_STR, Constantes.TYPE_STR, Constantes.TYPE_STR, Constantes.TYPE_STR, Constantes.TYPE_QUERY, Constantes.TYPE_QUERY, Constantes.TYPE_QUERY, Constantes.TYPE_QUERY, Constantes.TYPE_STR, Constantes.TYPE_STR, Constantes.TYPE_MONEY, Constantes.TYPE_STR]
+    dict_types = dict(zip(columns, type))
+    df = pandas.DataFrame(columns=columns, dtype=str)
+    return df, dict_types
+
     

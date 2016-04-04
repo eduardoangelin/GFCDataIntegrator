@@ -182,3 +182,25 @@ def addDisponibilidadeFinal(dtCSV, dtPlanoContasFinaceiro):
             dtPlanoContasFinaceiro.loc[newIndex, 'TIPO'] = (Constantes.CX  if (len(cod_cta) == maxLenCTA) else None)
             
     return dtPlanoContasFinaceiro
+
+def createGeraMovimentoDataFrame (dtCSV, dtGeraMovimento):
+    for idx, row in dtCSV.iterrows():
+        newIndex = len(dtGeraMovimento)
+        dtGeraMovimento.loc[newIndex] = [None for i in range(len(dtGeraMovimento.columns))]
+        CONTA_CREDITO = applyMask(row['CONTA_CREDITO'], Constantes.mask)
+        CONTA_DEBITO = applyMask(row['CONTA_DEBITO'], Constantes.mask)
+        CENTROCUSTO = str(row['CENTROCUSTO'])
+        
+        dtGeraMovimento.loc[newIndex, 'DATA'] = row['DATA']
+        dtGeraMovimento.loc[newIndex, 'DOCUMENTO'] = row['DOCUMENTO']
+        dtGeraMovimento.loc[newIndex, 'CONTACREDORA'] = CONTA_CREDITO
+        dtGeraMovimento.loc[newIndex, 'CENTROCUSTOCREDOR'] = CENTROCUSTO
+        dtGeraMovimento.loc[newIndex, 'CONTADEVEDORA'] = CONTA_DEBITO
+        dtGeraMovimento.loc[newIndex, 'CENTROCUSTODEVEDOR'] = CENTROCUSTO
+        dtGeraMovimento.loc[newIndex, 'VALOR'] = row['VALOR']
+        dtGeraMovimento.loc[newIndex, 'HIST'] = row['HISTORICO']
+        dtGeraMovimento.loc[newIndex, 'COMANDO'] = 'I'
+                
+    return dtGeraMovimento
+
+
