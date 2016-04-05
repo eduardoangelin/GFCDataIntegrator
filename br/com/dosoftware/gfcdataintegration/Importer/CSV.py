@@ -28,6 +28,40 @@ def convertPandasDF2Matrix(df): # returning a numpy (nd)array
     ndArray = ndArray.T # transpose, other matrix operations also supports
     return ndArray
 
+def splitFile(path, number_lines):
+	with open(path) as f:
+		content = f.readlines();
+	
+	splited = content
+	max_lines = len(splited)
+	listFiles = []
+	actualFile = []
+	for i in splited:
+		if len(actualFile) > number_lines:
+			listFiles += [actualFile]
+			actualFile = []
+		actualFile += [i]
+
+		
+	count = 1
+	out = ""
+	for i in listFiles:
+		out = "\n".join(i)
+
+		filebyPoint = path.split(".")
+		if (len(filebyPoint) == 2):
+			outputFile = filebyPoint[0]+"_Part"+str(count)+"."+filebyPoint[1]
+		else:
+			outputFile = path+str(count)
+		
+		with open(outputFile,'w') as f:
+			print(outputFile)
+			f.write(out)
+			f.close()
+
+		out = ""
+		count+=1
+
 
 def WriteFile(filename, content):
     filename = (os.path.join(path, 'resources', 'CSV', 'CC', filename))
